@@ -72,8 +72,8 @@ describe("fetchPokemonDetail", () => {
     it("maps abilities from nested API response to flat string array", async () => {
         const result = await fetchPokemonDetail("bulbasaur");
 
-        result.abilities.forEach((ability: { name: string }) => {
-            expect(typeof ability.name).toBe("string");
+        result.abilities.forEach((ability: string) => {
+            expect(typeof ability).toBe("string");
         });
     });
 
