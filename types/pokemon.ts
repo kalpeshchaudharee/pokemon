@@ -29,6 +29,16 @@ export type PokeAPITypeSlot = {
     type: { name: string };
 };
 
+export type PokeAPIAbility = {
+    ability: { name: string };
+    is_hidden: boolean;
+};
+
+export type PokeAPIStat = {
+    base_stat: number;
+    stat: { name: string };
+};
+
 export type PokeAPIPokemonResponse = {
     id: number;
     name: string;
@@ -43,6 +53,6 @@ export type PokeAPIPokemonResponse = {
     };
     height: number;
     weight: number;
-    abilities: { ability: { name: string }; is_hidden: boolean }[];
-    stats: { base_stat: number; stat: { name: string } }[];
+    abilities: PokeAPIAbility[];
+    stats: PokeAPIStat[];
 };

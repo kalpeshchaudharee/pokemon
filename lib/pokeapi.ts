@@ -1,4 +1,4 @@
-import type { PokeAPIListResponse, PokeAPIPokemonResponse, PokeAPITypeSlot, Pokemon, PokemonDetail } from "@/types/pokemon";
+import type { PokeAPIAbility, PokeAPIListResponse, PokeAPIPokemonResponse, PokeAPIStat, PokeAPITypeSlot, Pokemon, PokemonDetail } from "@/types/pokemon";
 
 const API_URL = "https://pokeapi.co/api/v2";
 
@@ -42,7 +42,7 @@ export const fetchPokemonDetail = async (name: string): Promise<PokemonDetail> =
         sprite: raw.sprites.front_default,
         height: raw.height,
         weight: raw.weight,
-        abilities: raw.abilities.map((a: { ability: { name: string } }) => a.ability.name),
-        stats: raw.stats.map((s: { base_stat: number; stat: { name: string } }) => ({ name: s.stat.name, value: s.base_stat })),
+        abilities: raw.abilities.map((a: PokeAPIAbility) => a.ability.name),
+        stats: raw.stats.map((s: PokeAPIStat) => ({ name: s.stat.name, value: s.base_stat })),
     }
 }
