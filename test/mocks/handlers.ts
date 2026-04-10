@@ -8,7 +8,7 @@ export const handlers = [
 
         const results = Array.from({ length: Number(limit) }, (_, i) => ({
             name: ["bulbasaur", "charmander", "squirtle"][i] ?? `pokemon-${i + 1}`,
-            url: `https://pokeapi.com/api/v2/pokemon/${i + 1}/`
+            url: `https://pokeapi.co/api/v2/pokemon/${i + 1}/`
         }));
 
         return HttpResponse.json({
