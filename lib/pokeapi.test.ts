@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { fetchPokemonList } from "./pokeapi";
 
 describe("fetchPokemonList", () => {
     it("returns an array of Pokemon with id, name, types, and sprite", async () => {
@@ -29,10 +30,10 @@ describe("fetchPokemonList", () => {
     it("maps types from nested API response to flat string array", async () => {
         const result = await fetchPokemonList();
        
-        result.foreach((pokemon) => {
+        result.forEach((pokemon) => {
             expect(Array.isArray(pokemon.types)).toBe(true);
 
-            pokemon.types.forEach((type) => {
+            pokemon.types.forEach((type: string) => {
                 expect(typeof type).toBe("string");
             });
         })
