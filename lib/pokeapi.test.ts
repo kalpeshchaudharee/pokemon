@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { fetchPokemonList } from "./pokeapi";
+import { fetchPokemonList, fetchPokemonDetail } from "./pokeapi";
+import { http, HttpResponse } from "msw";
 
 describe("fetchPokemonList", () => {
     it("returns an array of Pokemon with id, name, types, and sprite", async () => {
@@ -29,7 +30,7 @@ describe("fetchPokemonList", () => {
 
     it("maps types from nested API response to flat string array", async () => {
         const result = await fetchPokemonList();
-       
+
         result.forEach((pokemon) => {
             expect(Array.isArray(pokemon.types)).toBe(true);
 
@@ -38,4 +39,59 @@ describe("fetchPokemonList", () => {
             });
         })
     });
-})
+});
+
+describe("fetchPokemonDetail", () => {
+    it("returns a PokemonDetail with all required fields", async () => {
+        const result = await fetchPokemonDetail("bulbasaur");
+
+        expect(result).toBeDefined();
+        expect(result).toHaveProperty("id");
+        expect(result).toHaveProperty("name");
+        expect(result).toHaveProperty("types");
+        expect(result).toHaveProperty("sprite");
+        expect(result).toHaveProperty("height");
+        expect(result).toHaveProperty("weight");
+        expect(result).toHaveProperty("abilities");
+        expect(result).toHaveProperty("stats");
+    });
+
+    it("returns correctly mapped data for bulbasaur", async () => {
+        const result = await fetchPokemonDetail("bulbasaur");
+
+        expect(result).toBeDefined();
+        expect(result!.id).toBe(1);
+        expect(result!.name).toBe("bulbasaur");
+        expect(result!.types).toEqual(["grass", "poison"]);
+        expect(typeof result!.sprite).toBe("string");
+        expect(result!.sprite).toContain("pokemon/1");
+        expect(result!.height).toBe(7);
+        expect(result!.weight).toBe(69);
+    })
+
+    it("maps abilities from nested API response to flat string array", async () => {
+        const result = await fetchPokemonDetail("bulbasaur");
+
+        result.abilities.forEach((ability: { name: string }) => {
+            expect(typeof ability.name).toBe("string");
+        });
+    });
+
+    it("maps stats with name and value from API response", async () => {
+        const result = await fetchPokemonDetail("bulbasaur");
+
+        expect(result!.stats).toEqual([{ name: "hp", value: 45 }, { name: "attack", value: 49 }, { name: "defense", value: 49 }, { name: "special-attack", value: 65 }, { name: "special-defense", value: 65 }, { name: "speed", value: 45 }]);
+    });
+
+    it("throws an error for non-existent pokemon", async () => {
+        const { server } = await import("@/test/mocks/server");
+
+        server.use(
+            http.get("https://pokeapi.co/api/v2/pokemon/:name", () => {
+                return HttpResponse.json({ error: "Not Found" }, { status: 404 });
+            })
+        );
+
+        await expect(fetchPokemonDetail("non-existent")).rejects.toThrow("API request failed: 404");
+    })
+});
