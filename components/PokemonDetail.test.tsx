@@ -1,6 +1,7 @@
 import { mockBulbasaurDetail } from "@/test/mocks/fixtures";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { PokemonDetail } from "./PokemonDetail";
 
 describe("PokemonDetail", () => {
     it("renders the pokemon name", () => {
@@ -38,18 +39,22 @@ describe("PokemonDetail", () => {
 
     it("renders the pokemon stats with name and value", () => {
         render(<PokemonDetail pokemon={mockBulbasaurDetail} />);
-        expect(screen.getByText(/hp/i)).toBeInTheDocument();
-        expect(screen.getByText(/45/)).toBeInTheDocument();
-        expect(screen.getByText(/attack/i)).toBeInTheDocument();
-        expect(screen.getByText(/49/)).toBeInTheDocument();
-        expect(screen.getByText(/defense/i)).toBeInTheDocument();
-        expect(screen.getByText(/49/)).toBeInTheDocument();
-        expect(screen.getByText(/special-attack/i)).toBeInTheDocument();
-        expect(screen.getByText(/65/)).toBeInTheDocument();
-        expect(screen.getByText(/special-defense/i)).toBeInTheDocument();
-        expect(screen.getByText(/65/)).toBeInTheDocument();
-        expect(screen.getByText(/speed/i)).toBeInTheDocument();
-        expect(screen.getByText(/45/)).toBeInTheDocument();
+
+        const expectedStats = [
+            { name: "hp", value: "45" },
+            { name: "attack", value: "49" },
+            { name: "defense", value: "49" },
+            { name: "special-attack", value: "65" },
+            { name: "special-defense", value: "65" },
+            { name: "speed", value: "45" },
+        ];
+
+        expectedStats.forEach(({ name, value }) => {
+            const row = screen.getByTestId(`stat-${name}`);
+            expect(row).toHaveTextContent(name);
+            expect(row).toHaveTextContent(value);
+        });
+
     });
 
     it("renders the pokemon id formatted as #001", () => {
