@@ -7,7 +7,7 @@ export default async function Home() {
   const pokemonList = await fetchPokemonList();
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8">
+    <main className="mx-auto w-2/3 px-4 py-8">
       <h1 className="mb-8 text-center text-4xl font-bold">Pokedex</h1>
       <PokemonGrid pokemonList={pokemonList} />
     </main>

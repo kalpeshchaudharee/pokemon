@@ -33,13 +33,13 @@ export function SearchFilter({ onSearchChange, onTypeChange, types, debounceTime
     }, [search, onSearchChange]);
 
     return (
-        <div className="flex flex-col gap-4 sm:flex-row">
+        <div className="flex w-full flex-col gap-4 sm:flex-row">
           <input
             type="text"
             placeholder="Search Pokemon..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none"
+            className="w-full sm:flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none"
           />
           <select
             onChange={(e) => onTypeChange(e.target.value)}

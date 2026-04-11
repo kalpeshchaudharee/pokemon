@@ -28,7 +28,7 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
 
     return (
         <div>
-            <div className="sticky top-0 z-10 bg-background pb-4">
+            <div className="z-10 bg-background pb-4">
                 <SearchFilter
                     types={uniqueTypes}
                     onSearchChange={setSearchText}
@@ -39,7 +39,7 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
             {filteredPokemon.length === 0 ? (
                 <p className="mt-8 text-center text-gray-500">No Pokemon found</p>
             ) : (
-                <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 max-w-full">
                     {filteredPokemon.map((pokemon) => (
                         <PokemonCard key={pokemon.id} pokemon={pokemon} />
                     ))}
