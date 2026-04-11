@@ -47,5 +47,11 @@ describe("PokemonCard", () => {
         render(<PokemonCard pokemon={singleTypePokemon} />);
         expect(screen.getByText("charmander")).toBeInTheDocument();
         expect(screen.getByText("fire")).toBeInTheDocument();
-    })
+    });
+
+    it("links to the pokemon detail page", () => {
+        render(<PokemonCard pokemon={mockPokemon} />);
+        const link = screen.getByRole("link");
+        expect(link).toHaveAttribute("href", "/pokemon/bulbasaur");
+    });
 });
