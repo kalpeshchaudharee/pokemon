@@ -28,12 +28,14 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
 
     return (
         <div>
-            <SearchFilter
-                types={uniqueTypes}
-                onSearchChange={setSearchText}
-                onTypeChange={setSelectedType}
-                debounceTime={0}
-            />
+            <div className="sticky top-0 z-10 bg-background pb-4">
+                <SearchFilter
+                    types={uniqueTypes}
+                    onSearchChange={setSearchText}
+                    onTypeChange={setSelectedType}
+                    debounceTime={300}
+                />
+            </div>
             {filteredPokemon.length === 0 ? (
                 <p className="mt-8 text-center text-gray-500">No Pokemon found</p>
             ) : (
