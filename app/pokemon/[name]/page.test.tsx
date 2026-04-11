@@ -13,8 +13,8 @@ vi.mock("@/components/PokemonDetail", () => ({
     ) 
 }));
 
-import PokemonPage from "./page";
 import { render, screen } from "@testing-library/react";
+import PokemonPage from "./page";
 
 describe("detail Page", () => {
     it("renders the page with pokemon detail component", async () => {
