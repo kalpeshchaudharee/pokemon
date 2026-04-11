@@ -2,14 +2,14 @@
 
 A production-ready Pokemon listing and detail application built with Next.js, featuring ISR (Incremental Static Regeneration), client-side filtering, and a strict TDD workflow.
 
-**Live Demo:** [https://pokemon.kalpeshchaudhari.dev/](https://pokemon.kalpeshchaudhari.dev/])
+**Live Demo:** [[https://pokemon-teal.vercel.app/](https://pokemon-teal.vercel.app/)]
 
 ## Screenshots
 
-![Listing Page](screenshots/listing.png)
-![Detail Page](screenshots/detail.png)
-![Filtering](screenshots/filtering.png)
-![Searching](screenshots/searching.png)
+Listing Page
+Detail Page
+Filtering
+Searching
 
 ---
 
