@@ -1,6 +1,7 @@
 import { Pokemon } from "@/types/pokemon";
 import { TypeBadge } from "./TypeBadge";
 import Image from "next/image";
+import Link from "next/link";
 
 type PokemonCardProps = {
     pokemon: Pokemon;
@@ -10,6 +11,7 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
     const paddedId =`#${pokemon.id.toString().padStart(3, "0")}`;
 
     return (
+      <Link href={`/pokemon/${pokemon.name}`} className="block">
         <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-md">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-gray-400">{paddedId}</span>
@@ -29,5 +31,6 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
             ))}
           </div>
         </div>
+      </Link>
       );
 }
