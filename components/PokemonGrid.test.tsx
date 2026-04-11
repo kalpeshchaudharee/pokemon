@@ -2,7 +2,7 @@ import { mockPokemonList } from "@/test/mocks/fixtures";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
-import { PokemonGrid } from "./PokemonGird";
+import { PokemonGrid } from "./PokemonGrid";
 
 describe("PokemonGrid", () => {
     it("renders all pokemon cards", () => {
