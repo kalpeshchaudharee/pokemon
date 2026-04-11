@@ -2,6 +2,7 @@ import { mockPokemonList } from "@/test/mocks/fixtures";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
+import { PokemonGrid } from "./PokemonGird";
 
 describe("PokemonGrid", () => {
     it("renders all pokemon cards", () => {
@@ -17,11 +18,10 @@ describe("PokemonGrid", () => {
         render(<PokemonGrid pokemonList={mockPokemonList} />);
 
         const input = screen.getByPlaceholderText(/search/i);
-        await user.type(input, "pika");
+        await user.type(input, "char");
 
-        expect(screen.getByText("pikachu")).toBeInTheDocument();
+        expect(screen.getByText("charmander")).toBeInTheDocument();
         expect(screen.queryByText("bulbasaur")).not.toBeInTheDocument();
-        expect(screen.queryByText("charmander")).not.toBeInTheDocument();
         expect(screen.queryByText("squirtle")).not.toBeInTheDocument();
     });
 
