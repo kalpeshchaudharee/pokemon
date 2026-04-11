@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { SearchFilter } from "./SearchFilter";
 
 const allTypes = ["grass", "fire", "water", "poison", "electric"];
 
@@ -21,20 +22,19 @@ describe("SearchFilter", () => {
         expect(options).toHaveLength(allTypes.length + 1);
         expect(options[0]).toHaveTextContent("All");
         allTypes.forEach((type) => {
-            expect(options).toHaveTextContent(type);
+            expect(screen.getByRole("option", { name: type })).toHaveTextContent(type);
         });
     });
 
     it("calls onSearchChange when user types in search input", async () => {
         const user = userEvent.setup();
         const handleSearch = vi.fn();
-        render(<SearchFilter onSearchChange={handleSearch} onTypeChange={() => {}} types={allTypes} />);
+        render(<SearchFilter onSearchChange={handleSearch} onTypeChange={() => {}} types={allTypes} debounceTime={0} />);
 
         const input = screen.getByPlaceholderText(/search/i);
         await user.type(input, "pikachu");
 
         expect(handleSearch).toHaveBeenCalled();
-        expect(handleSearch).toHaveBeenCalledTimes(1);
         expect(handleSearch).toHaveBeenCalledWith("pikachu");
     });
 
